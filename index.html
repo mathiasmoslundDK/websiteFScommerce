@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>FS Commerce — Ecommerce Consulting for DTC Brands</title>
+<meta name="description" content="FS Commerce LLC provides e-commerce growth consulting to small and mid-sized DTC brands. Strategy, performance marketing, and operational consulting." />
+<meta name="author" content="Mathias Moslund" />
+<meta property="og:title" content="FS Commerce — Ecommerce Consulting for DTC Brands" />
+<meta property="og:description" content="E-commerce growth strategy and performance marketing consulting for direct-to-consumer brands." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://fs-commerce.com" />
+<meta name="twitter:card" content="summary" />
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230A0A0B'/><text x='50%25' y='57%25' text-anchor='middle' font-family='Helvetica,Arial,sans-serif' font-size='13' font-weight='600' fill='%23F6F5F2' dominant-baseline='middle'>FS</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script>
+  const TWEAKS = /*EDITMODE-BEGIN*/{
+    "theme": "dark",
+    "accent": "ice",
+    "headline": "default"
+  }/*EDITMODE-END*/;
+</script>
+<style>
+  :root{
+    --bg:#0A0A0B;
+    --fg:#F6F5F2;
+    --fg-2:#B9B7B1;
+    --fg-3:#6E6C66;
+    --line:rgba(246,245,242,0.10);
+    --line-2:rgba(246,245,242,0.06);
+    --surface:#111113;
+    --accent: oklch(0.80 0.14 85);
+    --accent-ink:#0A0A0B;
+    --grid: 84px;
+    --radius: 14px;
+    --ease: cubic-bezier(.2,.7,.2,1);
+    font-synthesis: none;
+    -webkit-font-smoothing:antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  html[data-theme="light"]{
+    --bg:#F6F5F2;
+    --fg:#0A0A0B;
+    --fg-2:#3A3A38;
+    --fg-3:#8A8A84;
+    --line:rgba(10,10,11,0.12);
+    --line-2:rgba(10,10,11,0.06);
+    --surface:#FFFFFF;
+    --accent-ink:#0A0A0B;
+  }
+  html[data-accent="amber"]  { --accent: oklch(0.80 0.14 85); }
+  html[data-accent="lime"]   { --accent: oklch(0.86 0.18 125); }
+  html[data-accent="ice"]    { --accent: oklch(0.84 0.12 220); }
+  html[data-accent="coral"]  { --accent: oklch(0.76 0.16 28); }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);}
+  body{
+    font-family:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-weight:400;
+    font-size:16px;
+    line-height:1.5;
+    letter-spacing:-0.005em;
+    overflow-x:hidden;
+  }
+  .mono{font-family:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:0;}
+  .serif{font-family:"Instrument Serif",Georgia,serif;font-style:italic;letter-spacing:-0.01em;}
+
+  a{color:inherit;text-decoration:none;}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
+
+  /* Grain overlay */
+  .grain{
+    position:fixed;inset:0;pointer-events:none;z-index:100;
+    opacity:.06;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* Layout */
+  .wrap{max-width:1320px;margin:0 auto;padding:0 40px;}
+  @media (max-width:720px){ .wrap{padding:0 20px;} }
+
+  /* Top bar */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: color-mix(in oklab, var(--bg) 72%, transparent);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .inner{
+    display:flex;align-items:center;justify-content:space-between;
+    height:64px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:500;letter-spacing:-0.01em;}
+  .brand .mark{
+    width:22px;height:22px;border-radius:6px;
+    background:
+      conic-gradient(from 210deg at 50% 50%, var(--accent), var(--fg) 55%, var(--accent));
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+  .nav{display:flex;gap:28px;}
+  .nav a{color:var(--fg-2);font-size:13.5px;}
+  .nav a:hover{color:var(--fg);}
+  @media (max-width:720px){ .nav{display:none;} }
+
+  .live{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12px;color:var(--fg-2);
+  }
+  .live .dot{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 0 color-mix(in oklab, var(--accent) 60%, transparent);
+    animation:pulse 2.4s var(--ease) infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 color-mix(in oklab, var(--accent) 60%, transparent);}
+    70%{box-shadow:0 0 0 10px transparent;}
+    100%{box-shadow:0 0 0 0 transparent;}
+  }
+
+  /* Section primitives */
+  section{position:relative;}
+  .sect-label{
+    display:flex;align-items:center;gap:14px;
+    font-family:"Geist Mono",monospace;
+    font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--fg-3);
+  }
+  .sect-label .idx{color:var(--fg-2);}
+  .sect-label .bar{flex:0 0 36px;height:1px;background:var(--line);}
+  .h-display{
+    font-size: clamp(44px, 7.6vw, 116px);
+    line-height: 0.96;
+    letter-spacing:-0.035em;
+    font-weight:500;
+    margin:0;
+  }
+  .h-display em{
+    font-family:"Instrument Serif",Georgia,serif;
+    font-style:italic;
+    font-weight:400;
+    letter-spacing:-0.02em;
+    color:var(--fg-2);
+  }
+  .h-display u{
+    text-decoration: none;
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-repeat:no-repeat;
+    background-position: 0 92%;
+    background-size: 100% 10px;
+    padding: 0 2px;
+  }
+  .h-section{
+    font-size: clamp(30px, 4.2vw, 56px);
+    line-height:1.02;
+    letter-spacing:-0.025em;
+    font-weight:500;
+    margin:0;
+  }
+
+  /* HERO */
+  .hero{padding: 56px 0 72px;}
+  .hero .meta-row{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:24px;flex-wrap:wrap;
+    padding-bottom:48px;
+  }
+  .hero .headline{
+    padding: 8px 0 56px;
+    max-width: 1160px;
+  }
+  .hero .undergrid{
+    display:grid;grid-template-columns: 1.1fr 1fr;gap:48px;
+    border-top:1px solid var(--line);
+    padding-top:28px;
+  }
+  @media (max-width:860px){ .hero .undergrid{grid-template-columns:1fr;gap:28px;} }
+  .hero .lede{
+    font-size: clamp(18px, 1.5vw, 20px);
+    line-height:1.45;
+    color:var(--fg-2);
+    max-width:52ch;
+    letter-spacing:-0.01em;
+  }
+  .hero .lede strong{color:var(--fg);font-weight:500;}
+  .cta-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 18px;
+    border-radius:999px;
+    font-size:14px;font-weight:500;
+    border:1px solid var(--line);
+    transition: transform .3s var(--ease), background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+  }
+  .btn:hover{transform: translateY(-1px);}
+  .btn--primary{background:var(--fg);color:var(--bg);border-color:var(--fg);}
+  .btn--primary:hover{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);}
+  .btn--ghost{color:var(--fg);}
+  .btn--ghost:hover{border-color:var(--fg-2);}
+  .btn .arr{display:inline-block;transition:transform .3s var(--ease);}
+  .btn:hover .arr{transform:translate(3px,-3px);}
+
+  /* Proof strip */
+  .proof{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:40px 0;
+    margin-top: 40px;
+  }
+  .proof-grid{
+    display:grid;grid-template-columns:repeat(4, 1fr);gap:40px;
+  }
+  @media (max-width:860px){ .proof-grid{grid-template-columns:repeat(2,1fr);} }
+  .stat .n{
+    font-size: clamp(36px, 4vw, 54px);
+    line-height:1;letter-spacing:-0.03em;font-weight:500;
+  }
+  .stat .n sup{
+    font-size:0.42em;letter-spacing:0;color:var(--fg-2);
+    vertical-align: top;margin-left:3px;font-weight:400;
+  }
+  .stat .lbl{
+    margin-top:10px;
+    font-family:"Geist Mono",monospace;
+    font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;
+    color:var(--fg-3);
+  }
+
+  /* Generic section */
+  .section-pad{padding: 120px 0;}
+  @media (max-width:720px){ .section-pad{padding:80px 0;} }
+  .sect-head{
+    display:grid;grid-template-columns:1fr 2fr;gap:40px;align-items:end;
+    padding-bottom:56px;
+    border-bottom:1px solid var(--line);
+  }
+  @media (max-width:860px){ .sect-head{grid-template-columns:1fr;gap:24px;} }
+  .sect-head .kicker{display:flex;flex-direction:column;gap:20px;}
+
+  /* Services */
+  .services-list{border-top:1px solid var(--line-2);margin-top:56px;}
+  .service{
+    display:grid;grid-template-columns: 80px 1.1fr 2fr 120px;
+    gap:32px;align-items:flex-start;
+    padding: 32px 0;
+    border-bottom:1px solid var(--line);
+    position:relative;
+    transition: padding .4s var(--ease);
+  }
+  .service:hover{padding-left:12px;}
+  .service .num{
+    font-family:"Geist Mono",monospace;font-size:12px;color:var(--fg-3);padding-top:6px;
+  }
+  .service .title{
+    font-size: clamp(22px, 2vw, 28px);
+    font-weight:500;letter-spacing:-0.02em;line-height:1.1;
+  }
+  .service .title small{
+    display:block;margin-top:8px;
+    font-family:"Geist Mono",monospace;font-size:11px;
+    color:var(--fg-3);letter-spacing:0.05em;text-transform:uppercase;font-weight:400;
+  }
+  .service .desc{color:var(--fg-2);font-size:15.5px;line-height:1.55;max-width:56ch;}
+  .service .tag{
+    justify-self:end;padding-top:8px;
+    font-family:"Geist Mono",monospace;font-size:11px;
+    color:var(--fg-3);letter-spacing:0.05em;text-transform:uppercase;
+  }
+  .service::after{
+    content:"↗";position:absolute;right:0;bottom:32px;
+    font-size:18px;color:var(--fg-3);
+    opacity:0;transform:translate(-8px,8px);
+    transition: all .4s var(--ease);
+  }
+  .service:hover::after{opacity:1;transform:translate(0,0);color:var(--accent);}
+  @media (max-width:860px){
+    .service{grid-template-columns: 48px 1fr;gap:16px;}
+    .service .desc, .service .tag{grid-column: 2 / -1;}
+    .service::after{display:none;}
+  }
+
+  /* Process */
+  .proc{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:56px;
+    border-radius: var(--radius);
+    overflow:hidden;
+  }
+  @media (max-width:860px){ .proc{grid-template-columns:1fr 1fr;} }
+  @media (max-width:520px){ .proc{grid-template-columns:1fr;} }
+  .step{
+    background:var(--bg);
+    padding:28px 28px 56px;
+    min-height: 240px;
+    display:flex;flex-direction:column;justify-content:space-between;gap:24px;
+    position:relative;
+    transition: background .4s var(--ease);
+  }
+  .step:hover{background:var(--surface);}
+  .step .n{
+    font-family:"Geist Mono",monospace;font-size:12px;color:var(--fg-3);
+  }
+  .step .t{
+    font-size:22px;font-weight:500;letter-spacing:-0.02em;line-height:1.15;
+  }
+  .step .d{color:var(--fg-2);font-size:14px;line-height:1.5;}
+  .step .dur{
+    position:absolute;right:20px;top:20px;
+    font-family:"Geist Mono",monospace;font-size:10.5px;color:var(--fg-3);
+    letter-spacing:0.05em;text-transform:uppercase;
+  }
+
+  /* About */
+  .about-grid{
+    display:grid;grid-template-columns: 1fr 1.2fr;gap:72px;margin-top:56px;
+    align-items:start;
+  }
+  @media (max-width:860px){ .about-grid{grid-template-columns:1fr;gap:40px;} }
+  .portrait{
+    aspect-ratio: 4/5;
+    border-radius: var(--radius);
+    border:1px solid var(--line);
+    background:
+      repeating-linear-gradient(135deg,
+        color-mix(in oklab, var(--fg) 8%, var(--bg)) 0 6px,
+        var(--bg) 6px 14px);
+    position:relative;overflow:hidden;
+  }
+  .portrait .pl{
+    position:absolute;left:16px;bottom:16px;
+    font-family:"Geist Mono",monospace;font-size:11px;
+    color:var(--fg-3);letter-spacing:0.05em;text-transform:uppercase;
+    background: color-mix(in oklab, var(--bg) 75%, transparent);
+    border:1px solid var(--line);padding:6px 10px;border-radius:999px;
+  }
+  .about-body p{
+    font-size: clamp(17px, 1.4vw, 19px);
+    line-height:1.55;color:var(--fg-2);margin:0 0 20px;max-width:58ch;
+    letter-spacing:-0.005em;
+  }
+  .about-body p strong{color:var(--fg);font-weight:500;}
+  .about-meta{
+    margin-top:28px;padding-top:24px;border-top:1px solid var(--line);
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  }
+  .about-meta .k{
+    font-family:"Geist Mono",monospace;font-size:11px;color:var(--fg-3);
+    letter-spacing:0.05em;text-transform:uppercase;margin-bottom:6px;
+  }
+  .about-meta .v{font-size:15px;color:var(--fg);}
+
+  /* FAQ */
+  .faq{margin-top:56px;border-top:1px solid var(--line);}
+  .q{
+    border-bottom:1px solid var(--line);
+    padding:24px 0;
+    cursor:pointer;
+    display:grid;grid-template-columns: 1fr auto;gap:24px;align-items:center;
+  }
+  .q .qt{
+    font-size: clamp(18px, 1.6vw, 22px);
+    font-weight:500;letter-spacing:-0.015em;line-height:1.3;
+  }
+  .q .plus{
+    width:28px;height:28px;border-radius:50%;
+    border:1px solid var(--line);
+    display:grid;place-items:center;
+    color:var(--fg-2);font-size:18px;line-height:1;
+    transition: transform .35s var(--ease), background .35s var(--ease), color .35s var(--ease);
+  }
+  details[open] .plus{transform:rotate(45deg);background:var(--fg);color:var(--bg);border-color:var(--fg);}
+  details .a{
+    color:var(--fg-2);font-size:15.5px;line-height:1.6;max-width:64ch;
+    padding: 0 0 24px;
+    animation: fadeIn .3s var(--ease);
+  }
+  @keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+  details > summary{list-style:none;}
+  details > summary::-webkit-details-marker{display:none;}
+
+  /* Contact */
+  .contact{
+    border-top:1px solid var(--line);
+    padding: 120px 0 80px;
+    position:relative;
+  }
+  .contact-grid{
+    display:grid;grid-template-columns: 1fr 1fr;gap:48px;align-items:end;
+  }
+  @media (max-width:860px){ .contact-grid{grid-template-columns:1fr;gap:32px;} }
+  .contact h2{margin:0;}
+  .email-btn{
+    display:inline-flex;align-items:center;gap:14px;
+    padding: 18px 24px;
+    border-radius: 999px;
+    background:var(--fg);color:var(--bg);
+    font-size:17px;font-weight:500;letter-spacing:-0.01em;
+    border:1px solid var(--fg);
+    transition: all .35s var(--ease);
+  }
+  .email-btn:hover{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);}
+  .email-btn .arr{transition:transform .35s var(--ease);}
+  .email-btn:hover .arr{transform:translate(4px,-4px);}
+
+  .contact-meta{
+    display:flex;gap:40px;flex-wrap:wrap;
+    margin-top:40px;color:var(--fg-2);font-size:14px;
+  }
+  .contact-meta .k{
+    font-family:"Geist Mono",monospace;font-size:11px;color:var(--fg-3);
+    letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px;display:block;
+  }
+
+  /* Footer */
+  footer{
+    border-top:1px solid var(--line);
+    padding: 28px 0 36px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:"Geist Mono",monospace;font-size:11.5px;
+    color:var(--fg-3);letter-spacing:0.04em;text-transform:uppercase;
+    gap:20px;flex-wrap:wrap;
+  }
+
+  /* Marquee brands */
+  .marquee{
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+    padding: 20px 0;
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .marquee-track{
+    display:flex;gap:64px;
+    animation: scroll 38s linear infinite;
+    white-space:nowrap;
+    width:max-content;
+  }
+  .marquee:hover .marquee-track{animation-play-state:paused;}
+  @keyframes scroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+  .mq-item{
+    display:inline-flex;align-items:center;gap:14px;
+    color:var(--fg-2);font-size:19px;letter-spacing:-0.01em;font-weight:500;
+  }
+  .mq-item .mq-dot{
+    width:6px;height:6px;border-radius:50%;background:var(--fg-3);
+  }
+  .mq-item em{color:var(--fg-3);font-style:normal;font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .9s var(--ease), transform .9s var(--ease);}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* Tweaks panel */
+  .tw-panel{
+    position:fixed;right:20px;bottom:20px;z-index:120;
+    background: color-mix(in oklab, var(--bg) 88%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:16px;
+    width:260px;
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.4);
+    display:none;
+    font-family:"Geist Mono",monospace;
+  }
+  .tw-panel.on{display:block;}
+  .tw-panel h4{
+    margin:0 0 14px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-3);
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .tw-row{margin-bottom:14px;}
+  .tw-row:last-child{margin-bottom:0;}
+  .tw-row .lbl{font-size:11px;color:var(--fg-2);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em;}
+  .tw-seg{
+    display:flex;gap:4px;border:1px solid var(--line);border-radius:8px;padding:3px;
+  }
+  .tw-seg button{
+    flex:1;padding:7px 8px;font-size:11px;border-radius:6px;color:var(--fg-2);
+    text-transform:uppercase;letter-spacing:0.05em;
+  }
+  .tw-seg button.sel{background:var(--fg);color:var(--bg);}
+
+  .tw-dots{display:flex;gap:8px;}
+  .tw-dots button{
+    width:24px;height:24px;border-radius:50%;border:1px solid var(--line);
+    transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+  }
+  .tw-dots button.sel{box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--fg);}
+  .tw-dots button[data-c="amber"]{background: oklch(0.80 0.14 85);}
+  .tw-dots button[data-c="lime"] {background: oklch(0.86 0.18 125);}
+  .tw-dots button[data-c="ice"]  {background: oklch(0.84 0.12 220);}
+  .tw-dots button[data-c="coral"]{background: oklch(0.76 0.16 28);}
+</style>
+</head>
+<body data-screen-label="Mathias Moslund — site">
+<div class="grain" aria-hidden="true"></div>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="wrap inner">
+    <a class="brand" href="#top">
+      <span class="mark" aria-hidden="true"></span>
+      <span>FS Commerce</span>
+      <span class="mono" style="color:var(--fg-3);font-size:12px;margin-left:4px;">/ LLC</span>
+    </a>
+    <nav class="nav">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <span class="live mono">
+      <span class="dot"></span>
+      <span>Available for new clients</span>
+    </span>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="meta-row reveal">
+      <div class="sect-label"><span class="idx">00</span><span class="bar"></span><span>Index</span></div>
+      <div class="mono" style="color:var(--fg-3);font-size:12px;">
+        Delaware LLC · Granada Hills, CA · <span id="clock">—</span>
+      </div>
+    </div>
+
+    <h1 class="h-display headline reveal" id="headline">
+      E-commerce growth<br/>
+      consulting for <em>DTC</em><br/>
+      <u>brands</u>.
+    </h1>
+
+    <div class="undergrid reveal">
+      <p class="lede">
+        <strong>FS Commerce LLC</strong> provides e-commerce strategy and growth consulting to small and mid-sized direct-to-consumer brands. Based in California and incorporated in Delaware, we work with US-based clients on performance marketing, operations, and conversion optimization.
+      </p>
+      <div class="cta-row" style="justify-self:end;align-self:end;">
+        <a class="btn btn--primary" href="#contact">
+          Get in touch <span class="arr">↗</span>
+        </a>
+        <a class="btn btn--ghost" href="#services">See services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="wrap">
+  <div class="proof reveal">
+    <div class="proof-grid">
+      <div class="stat">
+        <div class="n">Delaware</div>
+        <div class="lbl">State of formation</div>
+      </div>
+      <div class="stat">
+        <div class="n">California</div>
+        <div class="lbl">US operations</div>
+      </div>
+      <div class="stat">
+        <div class="n">DTC</div>
+        <div class="lbl">Client focus</div>
+      </div>
+      <div class="stat">
+        <div class="n">Retainer</div>
+        <div class="lbl">Engagement model</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES MARQUEE -->
+<div class="marquee" aria-label="Industries we work with" style="margin-top:40px;">
+  <div class="marquee-track">
+    <span class="mq-item">Apparel &amp; fashion <em>industry</em></span><span class="mq-dot"></span>
+    <span class="mq-item">Home &amp; lifestyle <em>industry</em></span><span class="mq-dot"></span>
+    <span class="mq-item">Health &amp; wellness <em>industry</em></span><span class="mq-dot"></span>
+    <span class="mq-item">Beauty &amp; skincare <em>industry</em></span><span class="mq-dot"></span>
+    <span class="mq-item">Food &amp; beverage <em>industry</em></span><span class="mq-dot"></span>
+    <span class="mq-item">Accessories <em>industry</em></span><span class="mq-dot"></span>
+    <span class="mq-item">Outdoor &amp; sports <em>industry</em></span><span class="mq-dot"></span>
+    <!-- duplicate for loop -->
+    <span class="mq-item">Apparel &amp; fashion <em>industry</em></span><span class="mq-dot"></span>
+    <span class="mq-item">Home &amp; lifestyle <em>industry</em></span><span class="mq-dot"></span>
+    <span class="mq-item">Health &amp; wellness <em>industry</em></span><span class="mq-dot"></span>
+    <span class="mq-item">Beauty &amp; skincare <em>industry</em></span><span class="mq-dot"></span>
+    <span class="mq-item">Food &amp; beverage <em>industry</em></span><span class="mq-dot"></span>
+    <span class="mq-item">Accessories <em>industry</em></span><span class="mq-dot"></span>
+    <span class="mq-item">Outdoor &amp; sports <em>industry</em></span><span class="mq-dot"></span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="section-pad">
+  <div class="wrap">
+    <div class="sect-head reveal">
+      <div class="kicker">
+        <div class="sect-label"><span class="idx">01</span><span class="bar"></span><span>Services</span></div>
+        <div class="mono" style="color:var(--fg-3);font-size:12px;">Six workstreams. One team.</div>
+      </div>
+      <h2 class="h-section">Services offered — e-commerce growth consulting for DTC brands.</h2>
+    </div>
+
+    <div class="services-list reveal">
+
+      <div class="service">
+        <div class="num">01</div>
+        <div class="title">Growth strategy &amp; roadmap
+          <small>Planning · Channel mix · Quarterly goals</small>
+        </div>
+        <div class="desc">Building a clear e-commerce growth roadmap: what to focus on, in what order, and how to measure progress quarter by quarter.</div>
+        <div class="tag">Service</div>
+      </div>
+
+      <div class="service">
+        <div class="num">02</div>
+        <div class="title">Performance marketing
+          <small>Paid acquisition · Retention · Scaling</small>
+        </div>
+        <div class="desc">Advising on paid acquisition, retention, and scaling across Meta, Google, and TikTok. Budget planning, creative guidance, and weekly reviews.</div>
+        <div class="tag">Service</div>
+      </div>
+
+      <div class="service">
+        <div class="num">03</div>
+        <div class="title">Operational consulting
+          <small>Early revenue to mid-market</small>
+        </div>
+        <div class="desc">Supporting DTC brands as they scale from early revenue to mid-market — process, team structure, and the operational basics of a growing store.</div>
+        <div class="tag">Service</div>
+      </div>
+
+      <div class="service">
+        <div class="num">04</div>
+        <div class="title">Data &amp; conversion optimization
+          <small>Analytics · CRO · Reporting</small>
+        </div>
+        <div class="desc">Reviewing store analytics, identifying conversion bottlenecks, and recommending practical improvements to product pages, checkout, and email flows.</div>
+        <div class="tag">Service</div>
+      </div>
+
+      <div class="service">
+        <div class="num">05</div>
+        <div class="title">Shopify advisory
+          <small>Setup · Apps · Maintenance</small>
+        </div>
+        <div class="desc">Working with brands on Shopify and similar platforms — store setup, app stack recommendations, and ongoing maintenance guidance.</div>
+        <div class="tag">Service</div>
+      </div>
+
+      <div class="service">
+        <div class="num">06</div>
+        <div class="title">Retainer support
+          <small>Weekly calls · Async advisory</small>
+        </div>
+        <div class="desc">Ongoing consulting support on a monthly retainer: weekly calls, async advisory, and regular reporting for the client's internal team.</div>
+        <div class="tag">Service</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="section-pad" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sect-head reveal">
+      <div class="kicker">
+        <div class="sect-label"><span class="idx">02</span><span class="bar"></span><span>Engagement</span></div>
+        <div class="mono" style="color:var(--fg-3);font-size:12px;">A transparent, compounding cadence.</div>
+      </div>
+      <h2 class="h-section">How we work — from diagnostic to steady operating partner.</h2>
+    </div>
+
+    <div class="proc reveal">
+      <div class="step">
+        <div class="dur">Week 1</div>
+        <div>
+          <div class="n">01 — Introduction</div>
+          <div class="t" style="margin-top:10px;">A short call to understand the client's store, goals, and current marketing activity.</div>
+        </div>
+        <div class="d">No charge. If we're a good fit, we outline a simple scope of work and a monthly fee.</div>
+      </div>
+      <div class="step">
+        <div class="dur">Week 2</div>
+        <div>
+          <div class="n">02 — Onboarding</div>
+          <div class="t" style="margin-top:10px;">Access to ad accounts, Shopify, and email platform. A shared document of current metrics.</div>
+        </div>
+        <div class="d">A written engagement letter, a signed agreement, and the first invoice by ACH or wire.</div>
+      </div>
+      <div class="step">
+        <div class="dur">Monthly</div>
+        <div>
+          <div class="n">03 — Ongoing work</div>
+          <div class="t" style="margin-top:10px;">Weekly check-ins, campaign management, reporting, and monthly planning sessions.</div>
+        </div>
+        <div class="d">Invoiced on a monthly retainer basis. Clear deliverables and a standing agenda.</div>
+      </div>
+      <div class="step">
+        <div class="dur">Quarterly</div>
+        <div>
+          <div class="n">04 — Review</div>
+          <div class="t" style="margin-top:10px;">A quarterly review of results and priorities for the coming quarter.</div>
+        </div>
+        <div class="d">Simple, transparent reporting. Adjust scope as the client's store and team evolve.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section-pad" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sect-head reveal">
+      <div class="kicker">
+        <div class="sect-label"><span class="idx">03</span><span class="bar"></span><span>About</span></div>
+        <div class="mono" style="color:var(--fg-3);font-size:12px;">Principal · Operator · Partner</div>
+      </div>
+      <h2 class="h-section">About FS Commerce — e-commerce consulting led by Mathias Moslund.</h2>
+    </div>
+
+    <div class="about-grid reveal" style="grid-template-columns: 1fr;max-width:860px;">
+      <div class="about-body">
+        <p><strong>FS Commerce LLC</strong> is a Delaware-registered single-member LLC providing e-commerce growth consulting to small and mid-sized direct-to-consumer brands. The company was formed in March 2025 and operates out of Granada Hills, California.</p>
+        <p>The practice is owned and operated by Mathias Dahl Moslund, who works directly with each client. Engagements are structured as multi-month strategic retainers, typically ranging from $2,000 to $10,000 per month depending on scope.</p>
+        <p>Clients are primarily US-based DTC brands operating on Shopify and similar platforms. The company's California presence enables direct, in-person engagement with clients on the US West Coast.</p>
+
+        <div class="about-meta">
+          <div><div class="k">Entity</div><div class="v">FS Commerce LLC</div></div>
+          <div><div class="k">Formed</div><div class="v">Delaware · Mar 2025</div></div>
+          <div><div class="k">Operations</div><div class="v">Granada Hills, CA</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section-pad" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sect-head reveal">
+      <div class="kicker">
+        <div class="sect-label"><span class="idx">04</span><span class="bar"></span><span>FAQ</span></div>
+        <div class="mono" style="color:var(--fg-3);font-size:12px;">The conversations we always have.</div>
+      </div>
+      <h2 class="h-section">Questions worth answering before a first call.</h2>
+    </div>
+
+    <div class="faq reveal">
+      <details>
+        <summary class="q"><span class="qt">Who does FS Commerce work with?</span><span class="plus">+</span></summary>
+        <div class="a">Small and mid-sized e-commerce businesses, primarily in the United States, with a focus on direct-to-consumer brands operating on Shopify and similar platforms.</div>
+      </details>
+      <details>
+        <summary class="q"><span class="qt">What services do you offer?</span><span class="plus">+</span></summary>
+        <div class="a">E-commerce growth strategy and roadmap development, performance marketing strategy (paid acquisition, retention, scaling), operational consulting for scaling DTC brands, and data analysis and conversion optimization.</div>
+      </details>
+      <details>
+        <summary class="q"><span class="qt">How are engagements structured?</span><span class="plus">+</span></summary>
+        <div class="a">Multi-month strategic retainers tailored to each client's growth stage and objectives. Typical client engagements range from $2,000 to $10,000 per month.</div>
+      </details>
+      <details>
+        <summary class="q"><span class="qt">How do clients pay?</span><span class="plus">+</span></summary>
+        <div class="a">Retainer payments are received in USD by ACH, wire transfer, or card. All engagements are documented in a written agreement before any work begins.</div>
+      </details>
+      <details>
+        <summary class="q"><span class="qt">Where is FS Commerce based?</span><span class="plus">+</span></summary>
+        <div class="a">FS Commerce LLC is a Delaware-registered single-member LLC, with US operations based in Granada Hills, California. The company holds a valid EIN and is in good standing with the State of Delaware.</div>
+      </details>
+      <details>
+        <summary class="q"><span class="qt">How do I get started?</span><span class="plus">+</span></summary>
+        <div class="a">Send an email to <a href="mailto:mathiasmoslund@gmail.com">mathiasmoslund@gmail.com</a> with a short description of your brand and what you're hoping to work on. We'll schedule a short introduction call.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="sect-label reveal" style="margin-bottom:32px;"><span class="idx">05</span><span class="bar"></span><span>Contact</span></div>
+
+    <div class="contact-grid reveal">
+      <div>
+        <h2 class="h-display" style="font-size: clamp(44px, 6.5vw, 96px);">
+          Get in touch about<br/>your <em>DTC</em> brand.
+        </h2>
+      </div>
+      <div style="justify-self:end;">
+        <a class="email-btn" href="mailto:mathiasmoslund@gmail.com?subject=FS%20Commerce%20—%20inquiry">
+          mathiasmoslund@gmail.com <span class="arr">↗</span>
+        </a>
+        <div class="contact-meta">
+          <div>
+            <span class="k">Response</span>
+            Within 1–2 business days
+          </div>
+          <div>
+            <span class="k">Intro call</span>
+            30 minutes · video
+          </div>
+          <div>
+            <span class="k">Entity</span>
+            FS Commerce LLC
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;width:100%;align-items:center;gap:20px;flex-wrap:wrap;">
+    <div>© 2026 FS Commerce LLC · Delaware, USA</div>
+    <div style="display:flex;gap:24px;">
+      <a href="mailto:mathiasmoslund@gmail.com">Email</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+    </div>
+  </div>
+</footer>
+
+</main>
+
+<!-- TWEAKS -->
+<div class="tw-panel" id="twPanel" aria-hidden="true">
+  <h4>Tweaks <span class="mono" style="color:var(--fg-3);font-size:10px;">v1</span></h4>
+  <div class="tw-row">
+    <div class="lbl">Theme</div>
+    <div class="tw-seg" data-seg="theme">
+      <button data-v="dark">Dark</button>
+      <button data-v="light">Light</button>
+    </div>
+  </div>
+  <div class="tw-row">
+    <div class="lbl">Accent</div>
+    <div class="tw-dots" data-seg="accent">
+      <button data-c="amber" title="Amber"></button>
+      <button data-c="lime" title="Lime"></button>
+      <button data-c="ice" title="Ice"></button>
+      <button data-c="coral" title="Coral"></button>
+    </div>
+  </div>
+  <div class="tw-row">
+    <div class="lbl">Hero headline</div>
+    <div class="tw-seg" data-seg="headline">
+      <button data-v="default">Plateau</button>
+      <button data-v="alt1">Operator</button>
+      <button data-v="alt2">Sharp</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Apply tweaks
+  const headlines = {
+    default: `E-commerce growth<br/>consulting for <em>DTC</em><br/><u>brands</u>.`,
+    alt1:    `Strategy and <em>performance</em><br/>marketing for <u>online</u><br/>stores.`,
+    alt2:    `A practical <em>consultancy</em><br/>for direct-to-consumer<br/><u>growth</u>.`
+  };
+  function applyTweaks(t){
+    document.documentElement.setAttribute('data-theme', t.theme || 'dark');
+    document.documentElement.setAttribute('data-accent', t.accent || 'amber');
+    const h = document.getElementById('headline');
+    if(h && headlines[t.headline]) h.innerHTML = headlines[t.headline];
+    // update button selected states
+    document.querySelectorAll('.tw-seg').forEach(seg=>{
+      const key = seg.dataset.seg;
+      seg.querySelectorAll('button').forEach(b=>{
+        b.classList.toggle('sel', b.dataset.v === t[key]);
+      });
+    });
+    document.querySelectorAll('.tw-dots button').forEach(b=>{
+      b.classList.toggle('sel', b.dataset.c === t.accent);
+    });
+  }
+  applyTweaks(TWEAKS);
+
+  // Tweaks handlers
+  const panel = document.getElementById('twPanel');
+  function setTweak(key, val){
+    TWEAKS[key] = val;
+    applyTweaks(TWEAKS);
+    try{
+      window.parent.postMessage({type:'__edit_mode_set_keys', edits: {[key]: val}}, '*');
+    }catch(e){}
+  }
+  document.querySelectorAll('.tw-seg').forEach(seg=>{
+    seg.addEventListener('click', e=>{
+      const b = e.target.closest('button'); if(!b) return;
+      setTweak(seg.dataset.seg, b.dataset.v);
+    });
+  });
+  document.querySelector('.tw-dots').addEventListener('click', e=>{
+    const b = e.target.closest('button'); if(!b) return;
+    setTweak('accent', b.dataset.c);
+  });
+
+  // Edit-mode protocol — listener FIRST, then announce
+  window.addEventListener('message', (e)=>{
+    if(!e.data || typeof e.data !== 'object') return;
+    if(e.data.type === '__activate_edit_mode'){ panel.classList.add('on'); panel.setAttribute('aria-hidden','false'); }
+    if(e.data.type === '__deactivate_edit_mode'){ panel.classList.remove('on'); panel.setAttribute('aria-hidden','true'); }
+  });
+  try{ window.parent.postMessage({type:'__edit_mode_available'}, '*'); }catch(e){}
+
+  // Clock
+  function tickClock(){
+    const d = new Date();
+    const hh = String(d.getUTCHours()).padStart(2,'0');
+    const mm = String(d.getUTCMinutes()).padStart(2,'0');
+    const el = document.getElementById('clock');
+    if(el) el.textContent = `${hh}:${mm} UTC`;
+  }
+  tickClock(); setInterval(tickClock, 30000);
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+  }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Smooth anchor scroll (avoid scrollIntoView)
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const id = a.getAttribute('href');
+      if(id.length > 1){
+        const t = document.querySelector(id);
+        if(t){
+          e.preventDefault();
+          const y = t.getBoundingClientRect().top + window.scrollY - 64;
+          window.scrollTo({top: y, behavior:'smooth'});
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>
