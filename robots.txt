@@ -1,4 +1,2 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://fs-commerce.com/sitemap.xml
